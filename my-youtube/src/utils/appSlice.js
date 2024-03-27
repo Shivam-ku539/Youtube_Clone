@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice} from "@reduxjs/toolkit";
 
 const appSlice=createSlice({
     name:"app",
@@ -14,7 +14,6 @@ const appSlice=createSlice({
             state.isMenuOpen=false;
         },
         videoList:(state,action)=>{
-            console.log((action.payload))
             state.video=action.payload
         }
     },

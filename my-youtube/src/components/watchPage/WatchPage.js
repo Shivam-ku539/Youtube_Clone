@@ -6,8 +6,6 @@ import CommentsContainer from '../CommentsContainer'
 
 const WatchPage = () => {
     const [params,setParams]=useSearchParams();
-    console.log(params)
-    console.log(params.get("v"))
     const dispatch=useDispatch()
 
     useEffect(()=>{

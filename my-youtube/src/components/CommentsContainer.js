@@ -1,5 +1,7 @@
 import React from 'react'
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 
 const commentsData=[
     {
@@ -63,13 +65,12 @@ const Comment=({data})=>{
     const {name,text,reply}=data;
     return (
         <div className='flex shadow-sm bg-gray-200 p-2 rounded-lg'>
-            <img className='h-8' alt='user' src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"/>
+            <AccountCircleIcon/>
             <div className='px-3'>
                 <p className='font-bold'>{name}</p>
                 <p>{text}</p>
-                <span>👍</span>
-                <span>👎</span>
-                {/* <p className='font-bold'>{reply}</p> */}
+                <ThumbUpOffAltIcon/>
+                <ThumbDownOffAltIcon className='ml-4'/>
             </div>
         </div>
     )
