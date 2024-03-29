@@ -8,9 +8,11 @@ import ShimmerUi from '../../utils/shimmer/ShimmerUi';
 
 const VideoContainer = () => {
   
+  // const[videos,setVideos]=useState([])
   const dispatch=useDispatch()
   const videos=useSelector(store=>store.app.video)
-  console.log(videos)
+  // console.log(videos)
+  // setVideos(video)
   // const[videos,setVideos]=useState([])
   
   useEffect(()=>{

@@ -12,12 +12,13 @@ import TheatersIcon from '@mui/icons-material/Theaters';
 const Sidebar=()=>{
 
     const isMenuOpen=useSelector(store=>store.app.isMenuOpen)
+    const mode=useSelector(store=>store.mode.dark)
     
     //Early return style
     if(!isMenuOpen) return null;
 
     return (
-        <div className="p-5 shadow-lg w-48">
+        <div className={`p-5 shadow-lg w-48 ${mode ?'bg-gray-950 text-gray-300':'bg-white'} `}>
 
 <ul>
                 <li><Link to="/"><HomeOutlinedIcon/> Home</Link></li>

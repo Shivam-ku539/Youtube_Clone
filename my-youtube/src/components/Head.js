@@ -5,6 +5,9 @@ import { Video_Search_API, YouTube_Search_API } from "../utils/constant";
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { cacheResults } from "../utils/searchSlice";
 import SearchSharpIcon from '@mui/icons-material/SearchSharp';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import { toggleMode } from "../utils/darkLightSlice";
 
 const Head=()=>{
 
@@ -13,7 +16,8 @@ const Head=()=>{
     const[showSuggestions,setShowSuggestions]=useState(false);
     const dispatch=useDispatch();
     const getCache=useSelector((store)=>store.search)
-
+    const mode=useSelector((store)=>store.mode.dark)
+    
     useEffect(()=>{
     const timer=setTimeout(()=>
     {
@@ -57,18 +61,25 @@ const Head=()=>{
         setSearchquery(e.target.innerText)
         getSearchedVideo()
     }
+    const darkMode=()=>{
+        console.log("dark called")
+        dispatch(toggleMode(true))
+    }
+    const lightMode=()=>{
+        dispatch(toggleMode(false))
+    }
 
     return (
-    <div className="grid grid-flow-col p-2 m-2 shadow-md">
+    <div className={`grid grid-flow-col p-2 py-4 shadow-lg ${mode ?'bg-gray-950':'bg-white'}`}>
     <div className="flex col-span-1 justify-evenly">
-        <MenuRoundedIcon className="h-10 w-8 mr-1 mt-2" onClick={()=>toggleMenuHandler()}/>
-        <img className="h-6 mt-2" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/768px-YouTube_Logo_2017.svg.png"/>
+        <MenuRoundedIcon className={`h-10 w-8 mr-1 mt-2 ${mode ?'invert':'invert-0'}`} onClick={()=>toggleMenuHandler()}/>
+        <img className={`h-6 mt-2 ${mode ?'invert':'invert-0'}`} src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/768px-YouTube_Logo_2017.svg.png"/>
     </div>
     <div className="col-span-10">
         <div className="flex justify-center">
-        <input placeholder="Search" className="w-1/2 border-gray-400 p-1 pl-4 rounded-l-full border" type="text" value={searchQuery} onChange={(e)=>{setSearchquery(e.target.value)}} onFocus={()=>setShowSuggestions(true)}
+        <input placeholder="Search" className="w-1/2 border-gray-700 p-1 pl-4 rounded-l-full border bg-gray-600" type="text" value={searchQuery} onChange={(e)=>{setSearchquery(e.target.value)}} onFocus={()=>setShowSuggestions(true)}
         onBlur={()=>setShowSuggestions(false)}/>
-        <button className="border border-gray-400 p-2 rounded-r-full bg-gray-300 " onClick={()=>getSearchedVideo()} ><SearchSharpIcon/></button>
+        <button className="border border-gray-700 p-2 rounded-r-full bg-gray-600 " onClick={()=>getSearchedVideo()} ><SearchSharpIcon/></button>
         
         {showSuggestions &&(
         <div className="fixed bg-white mt-11 px-5 w-[33rem] shadow-lg rounded-lg border-gray-200">
@@ -80,8 +91,12 @@ const Head=()=>{
         )}
         </div>
     </div>
-    <div className="col-span-1 flex justify-center">
-        <img className="h-8" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"/>
+    <div className="col-span-1 flex justify-center bg-red-30">
+        <img className={`h-8 m-auto ${mode ?'invert':'invert-0'}`} src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"/>
+        {! mode &&
+        <DarkModeOutlinedIcon onClick={()=>{darkMode()}} className="m-auto"/>}
+        {mode &&
+        <LightModeOutlinedIcon onClick={()=>{lightMode()}} className="invert m-auto"/>}
     </div>
     </div>
     )
