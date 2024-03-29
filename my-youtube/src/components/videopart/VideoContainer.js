@@ -4,7 +4,7 @@ import VideoCard from './VideoCard';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { videoList } from '../../utils/appSlice';
-import ShimmerUi from '../../utils/ShimmerUi';
+import ShimmerUi from '../../utils/shimmer/ShimmerUi';
 
 const VideoContainer = () => {
   
