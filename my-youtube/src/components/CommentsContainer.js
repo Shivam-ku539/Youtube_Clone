@@ -2,6 +2,7 @@ import React from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+import { useSelector } from 'react-redux';
 
 const commentsData=[
     {
@@ -63,8 +64,9 @@ const commentsData=[
 
 const Comment=({data})=>{
     const {name,text,reply}=data;
+    const mode=useSelector((store)=>store.mode.dark)
     return (
-        <div className='flex shadow-sm bg-gray-200 p-2 rounded-lg'>
+        <div className={`flex shadow-sm p-2 rounded-lg ${mode ? 'bg-gray-600':'bg-gray-300'}`}>
             <AccountCircleIcon/>
             <div className='px-3'>
                 <p className='font-bold'>{name}</p>
@@ -94,7 +96,9 @@ const CommentsContainer = () => {
         <hr className=' bg-gray-400 h-[2px] mb-2'></hr>
         {/* <Comment data={commentsData[0]}/>
          */}
+         <div>
          <CommentsList comments={commentsData}/>
+         </div>
     </div>
   )
 }

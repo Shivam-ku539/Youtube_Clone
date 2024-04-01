@@ -42,7 +42,7 @@ const VideoCard = ({data}) => {
 
     const mode=useSelector((store)=>store.mode.dark)
     return (
-    <div className={`p-2 m-2 w-[350px] h-96 shadow-lg rounded-md ${mode ? 'bg-gray-900':'bg-white'}`}>
+    <div className={`p-2 m-2 w-80 h-96 shadow-lg rounded-md ${mode ? 'bg-gray-900 border border-slate-800':'bg-white'}`}>
         <img className='rounded-lg m-auto' alt='thumbnail' src={thumbnails.medium.url}/>
         <ul>
           <li className='font-bold py-2'>{title}</li>

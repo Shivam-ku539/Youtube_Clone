@@ -4,7 +4,9 @@ const appSlice=createSlice({
     name:"app",
     initialState:{
         video:[],
-        isMenuOpen:true,
+        isMenuOpen:false,
+        pageNumber:1,
+        numberOfContentIn_a_page:10
     },
     reducers:{
         toggleMenu:(state)=>{
@@ -15,9 +17,12 @@ const appSlice=createSlice({
         },
         videoList:(state,action)=>{
             state.video=action.payload
+        },
+        pageIndex:(state,action)=>{
+            state.pageNumber=action.payload
         }
     },
 });
 
-export const{toggleMenu,closeMenu,videoList}=appSlice.actions
+export const{toggleMenu,closeMenu,videoList,pageIndex}=appSlice.actions
 export default appSlice.reducer

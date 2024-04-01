@@ -5,15 +5,14 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { videoList } from '../../utils/appSlice';
 import ShimmerUi from '../../utils/shimmer/ShimmerUi';
+import PageCount from '../body/PageCount';
 
 const VideoContainer = () => {
   
-  // const[videos,setVideos]=useState([])
   const dispatch=useDispatch()
   const videos=useSelector(store=>store.app.video)
-  // console.log(videos)
-  // setVideos(video)
-  // const[videos,setVideos]=useState([])
+  const pageNo=useSelector(store=>store.app.pageNumber)
+  const numberOfContent=useSelector(store=>store.app.numberOfContentIn_a_page)
   
   useEffect(()=>{
     getVideos();
@@ -27,8 +26,13 @@ const VideoContainer = () => {
   }
   // videos.length==0?<ShimmerUi/>:
    return videos.length===0?<ShimmerUi/> : ( 
-    <div className='flex flex-wrap justify-center'>
-      {videos.map((video)=><Link key={video.id} to={"/watch?v="+video.id}><VideoCard  data={video}/></Link>)}
+    <div className='flex-col '>
+      <div className='flex flex-wrap justify-center'>
+      {videos.slice(pageNo*numberOfContent -numberOfContent,pageNo*numberOfContent).map((video)=><Link key={video.id} to={"/watch?v="+video.id}><VideoCard  data={video}/></Link>)}
+      </div>
+      <div className='flex justify-center'>
+      <PageCount/>
+      </div>
     </div>
   )
 }

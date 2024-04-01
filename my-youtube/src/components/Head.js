@@ -3,6 +3,7 @@ import { toggleMenu, videoList } from "../utils/appSlice";
 import { useEffect, useState } from "react";
 import { Video_Search_API, YouTube_Search_API } from "../utils/constant";
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { cacheResults } from "../utils/searchSlice";
 import SearchSharpIcon from '@mui/icons-material/SearchSharp';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
@@ -17,6 +18,7 @@ const Head=()=>{
     const dispatch=useDispatch();
     const getCache=useSelector((store)=>store.search)
     const mode=useSelector((store)=>store.mode.dark)
+    const sideBar=useSelector(store=>store.app.isMenuOpen)
     
     useEffect(()=>{
     const timer=setTimeout(()=>
@@ -70,22 +72,25 @@ const Head=()=>{
     }
 
     return (
-    <div className={`grid grid-flow-col p-2 py-4 shadow-lg ${mode ?'bg-gray-950':'bg-white'}`}>
+    <div className={`grid grid-flow-col p-2 py-4 shadow-lg ${mode ?'bg-gray-950':'bg-white'} fixed w-full`}>
     <div className="flex col-span-1 justify-evenly">
+        {!sideBar ?
         <MenuRoundedIcon className={`h-10 w-8 mr-1 mt-2 ${mode ?'invert':'invert-0'}`} onClick={()=>toggleMenuHandler()}/>
+         :<CloseOutlinedIcon onClick={()=>{toggleMenuHandler()}} className={`h-10 w-8 mr-1 mt-2 ${mode ?'invert':'invert-0'}`}/>
+     }
         <img className={`h-6 mt-2 ${mode ?'invert':'invert-0'}`} src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/768px-YouTube_Logo_2017.svg.png"/>
     </div>
     <div className="col-span-10">
         <div className="flex justify-center">
-        <input placeholder="Search" className="w-1/2 border-gray-700 p-1 pl-4 rounded-l-full border bg-gray-600" type="text" value={searchQuery} onChange={(e)=>{setSearchquery(e.target.value)}} onFocus={()=>setShowSuggestions(true)}
+        <input placeholder="Search" className={`w-1/2 border-gray-600 p-1 pl-4 rounded-l-full border ${mode? 'bg-gray-600':'bg-gray-300'} outline-none`} type="text" value={searchQuery} onChange={(e)=>{setSearchquery(e.target.value)}} onFocus={()=>setShowSuggestions(true)}
         onBlur={()=>setShowSuggestions(false)}/>
-        <button className="border border-gray-700 p-2 rounded-r-full bg-gray-600 " onClick={()=>getSearchedVideo()} ><SearchSharpIcon/></button>
+        <button className={`border border-gray-700 p-2 rounded-r-full bg-gray-300 ${mode ? 'bg-gray-600':'bg-gray-300'}`}  onClick={()=>getSearchedVideo()} ><SearchSharpIcon/></button>
         
         {showSuggestions &&(
         <div className="fixed bg-white mt-11 px-5 w-[33rem] shadow-lg rounded-lg border-gray-200">
             <ul>
                 {suggestions.map((x)=>
-                <li onClick={(e)=>{searchClick(e)}} key={x}  className="hover:bg-gray-200 px-2 cursor-pointer"><SearchSharpIcon/> {x}</li>)}
+                <li onClick={()=>console.log("first")} key={x}  className="hover:bg-gray-200 px-2 cursor-pointer"><SearchSharpIcon/> {x}</li>)}
             </ul>
         </div>
         )}

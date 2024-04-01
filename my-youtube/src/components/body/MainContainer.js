@@ -4,9 +4,13 @@ import VideoContainer from '../videopart/VideoContainer'
 
 const MainContainer = () => {
   return (
-    <div className=''>
+    <div className='w-screen '>
+      <div className='mx-4 overflow-x-scroll scrollbar-none'>
         <ButtonList/>
+      </div>
+      <div className=''>
         <VideoContainer/>
+      </div>
     </div>
   )
 }

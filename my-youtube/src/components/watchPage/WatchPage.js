@@ -12,11 +12,13 @@ const WatchPage = () => {
         dispatch(closeMenu())
     },[])
   return (
-    <div className='ml-24 mt-8'>
-    <div className=''>
-      <iframe className='rounded-xl shadow-lg' width="560" height="315" src={"https://www.youtube.com/embed/"+params.get("v")} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+    <div className='w-screen m-auto overflow-y-scroll scrollbar-thin'>
+    <div className='h-80 m-5'>
+      <iframe className='rounded-xl shadow-lg m-auto w-full h-full' width="" height="" src={"https://www.youtube.com/embed/"+params.get("v")} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
       </div>
+      <div className='m-6'>
       <CommentsContainer/>
+      </div>
       </div>  
   )
 }
